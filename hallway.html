@@ -353,17 +353,14 @@
     // Set a flag for use throughout the page
     window.isMobile = isMobileDevice();
   </script>
+  <!-- Direct script inclusion instead of dynamic creation -->
+  <script type="module" src="./hall.js"></script>
 </head>
 
 <body>
-  <!-- Load hall.js only if not on mobile -->
+  <!-- Check for mobile and show overlay if needed -->
   <script>
-    if (!window.isMobile) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = './hall.js';
-      document.body.appendChild(script);
-    } else {
+    if (window.isMobile) {
       // For mobile: immediately show the overlay when body loads
       window.addEventListener('DOMContentLoaded', function() {
         document.getElementById('mobileOverlay').style.display = 'flex';
