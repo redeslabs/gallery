@@ -25,13 +25,18 @@ function getImagePath(imageName) {
   // Make sure we're working with a clean image name
   const cleanImageName = imageName.trim();
   
-  // Check if the path already starts with a slash
-  if (cleanImageName.startsWith('/')) {
-    return cleanImageName; // Already has a leading slash
+  // Check if the path already includes a protocol or is a complete path
+  if (cleanImageName.includes('://') || cleanImageName.startsWith('/')) {
+    return cleanImageName; // Already has a complete path
   }
   
-  // Create the proper path
-  const fullPath = '/' + cleanImageName;
+  // For GitHub Pages deployment, we need to consider the base URL
+  // In production on GitHub Pages, this will be '/gallery/'
+  const baseUrl = import.meta.env.BASE_URL || '';
+  
+  // Since images are at the same level as JS files in the dist folder,
+  // we don't need to add any additional path segments
+  const fullPath = `${baseUrl}${cleanImageName}`;
   console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
   return fullPath;
 }
@@ -1145,7 +1150,7 @@ function showContactInfo(index, title, painting) {
       <h2>${purchaseType} Inquiry</h2>
       <p>Thank you for your interest in <strong>"${title}"</strong>.</p>
       <p>For pricing and availability information, please contact our gallery:</p>
-      <p class="email">art@redeslabs.com</p>
+      <p class="email">hello@redeslabs.com</p>
       <p>Please reference the painting ID: <strong>${painting.id}</strong></p>
       ${additionalInfo}
     </div>
