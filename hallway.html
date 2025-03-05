@@ -361,7 +361,7 @@
     if (!window.isMobile) {
       const script = document.createElement('script');
       script.type = 'module';
-      script.src = '/hall.js';
+      script.src = './hall.js';
       document.body.appendChild(script);
     } else {
       // For mobile: immediately show the overlay when body loads
@@ -392,7 +392,7 @@
 
   <script>
     document.getElementById('switchViewBtn').addEventListener('click', function() {
-      window.location.href = 'index.html';
+      window.location.href = './index.html';
     });
   </script>
 </body>
