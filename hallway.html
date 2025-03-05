@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Art Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    h1,
+    h2 {
+      color: white;
+      text-align: center;
+      width: 100%;
+      font-family: 'Inter';
+      font-weight: 100;
+      transition: opacity 0.5s ease-in-out;
+      pointer-events: none; /* Prevent text from interfering with clicks */
+    }
+
+    #title {
+      position: fixed;
+      font-size: 5.5em;
+      top: 0.2em;
+    }
+
+    #artist {
+      position: fixed;
+      font-size: 2.8em;
+      color: gray;
+      top: 3.2em;
+    }
+
+    /* Instructions message at bottom */
+    #instructions {
+      position: fixed;
+      bottom: 30px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2em;
+      font-weight: 300;
+      letter-spacing: 1px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .key {
+      display: inline-block;
+      background-color: rgba(76, 175, 80, 0.6);
+      color: white;
+      padding: 2px 12px;
+      margin: 0 5px;
+      border-radius: 4px;
+      font-weight: 400;
+    }
+
+    /* Detail View Styles */
+    #detailView {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .detail-content {
+      display: flex;
+      background-color: #1a1a1a;
+      color: white;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 1200px;
+      height: 80vh;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .painting-container {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background-color: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: grab;
+    }
+
+    .painting-container:active {
+      cursor: grabbing;
+    }
+
+    #threeDContainer {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: #121212;
+      min-height: 400px; /* Ensure minimum height */
+    }
+
+    #threeDContainer canvas {
+      width: 100% !important;
+      height: 100% !important;
+      outline: none;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .zoom-instructions {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9em;
+      pointer-events: none;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 0;
+      backdrop-filter: blur(5px);
+    }
+
+    .painting-details {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .painting-details h2 {
+      font-size: 2.5em;
+      margin-top: 0;
+      text-align: left;
+      pointer-events: auto;
+    }
+
+    .painting-details h3 {
+      font-weight: 300;
+      color: #aaa;
+      margin-top: 0;
+    }
+
+    .painting-details p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 1.4em !important;
+      color: #4CAF50 !important;
+      font-weight: bold;
+    }
+
+    .painting-id {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      font-size: 0.9em;
+    }
+
+    #closeDetailBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .action-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .action-buttons button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .action-buttons button:hover {
+      background-color: #3e8e41;
+    }
+
+    /* Contact Info Styles */
+    #contactInfo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .info-content {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      text-align: center;
+    }
+
+    .info-content h2 {
+      font-size: 2em;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .info-content p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .email {
+      font-size: 1.4em !important;
+      color: #4CAF50 !important;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    #closeContactBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .detail-content {
+        flex-direction: column;
+        height: 90vh;
+      }
+      
+      .painting-container, .painting-details {
+        flex: none;
+      }
+      
+      .painting-container {
+        height: 50%;
+      }
+      
+      .painting-details {
+        height: 50%;
+        padding: 20px;
+      }
+    }
+
+    /* Gallery navigation button */
+    #switchViewBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(76, 175, 80, 0.8);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+
+    #switchViewBtn:hover {
+      background-color: rgba(76, 175, 80, 1);
+    }
+
+    /* Mobile overlay styles */
+    #mobileOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      text-align: center;
+      padding: 20px;
+      display: none; /* Initially hidden, will be shown via JS if on mobile */
+    }
+
+    #mobileOverlay .message {
+      color: white;
+      font-size: 1.5em;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    #mobileOverlay .icon {
+      font-size: 3em;
+      color: rgba(76, 175, 80, 0.8);
+      margin-bottom: 20px;
+      display: block;
+    }
+  </style>
+  <script>
+    // Mobile detection function
+    function isMobileDevice() {
+      // Check for typical mobile screen size (width less than 768px is common for mobile)
+      const isMobileWidth = window.innerWidth < 768;
+      
+      // Additional check for mobile user agents
+      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      return isMobileWidth || isMobileUserAgent;
+    }
+    
+    // Set a flag for use throughout the page
+    window.isMobile = isMobileDevice();
+  </script>
+</head>
+
+<body>
+  <!-- Load hall.js only if not on mobile -->
+  <script>
+    if (!window.isMobile) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = '/hall.js';
+      document.body.appendChild(script);
+    } else {
+      // For mobile: immediately show the overlay when body loads
+      window.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('mobileOverlay').style.display = 'flex';
+        
+        // Hide the main content elements
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('artist').style.display = 'none';
+        document.getElementById('instructions').style.display = 'none';
+        document.getElementById('switchViewBtn').style.display = 'none';
+      });
+    }
+  </script>
+  <h1 id="title"></h1>
+  <h2 id="artist"></h2>
+  <div id="instructions">Press <span class="key">Enter</span> to view details</div>
+  <button id="switchViewBtn">View Gallery</button>
+
+  <!-- Mobile Device Message Overlay -->
+  <div id="mobileOverlay">
+    <div class="message">
+      <span class="icon">💻</span>
+      <p>This experience is only available on desktop or laptop screens.</p>
+      <p>Please visit this site on a larger screen for the full 3D gallery experience.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('switchViewBtn').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+
+</html>
