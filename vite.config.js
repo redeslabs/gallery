@@ -3,7 +3,7 @@
 */
 export default {
   // Set the base directory for GitHub pages
-  base: '',  // Empty base path to use relative paths
+  base: '/gallery/',  // Set to the repository name for GitHub Pages
   build: {
     outDir: './dist',
     sourcemap: true,
