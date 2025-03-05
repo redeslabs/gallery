@@ -1,124 +1,182 @@
 // Gallery Data File - Contains all painting information and gallery details
 
-// Data storage for paintings (will be populated from CSV)
-let paintings = [];
+// Hardcoded painting data from CSV
+// Exported arrays with painting data from CSV
+export let images = [
+  'socrates.jpg',
+  'stars.jpg',
+  'wave.jpg',
+  'spring.jpg',
+  'mountain.jpg',
+  'sunday.jpg'
+];
 
-// Exported arrays (will be populated from the paintings array)
-export let images = [];
-export let titles = [];
-export let artists = [];
-export let paintingDetails = [];
+export let titles = [
+  'The Death of Socrates',
+  'Starry Night',
+  'The Great Wave off Kanagawa',
+  'Effect of Spring Giverny',
+  'Mount Corcoran',
+  'A Sunday on La Grande Jatte'
+];
+
+export let artists = [
+  'Jacques-Louis David',
+  'Vincent Van Gogh',
+  'Katsushika Hokusai',
+  'Claude Monet',
+  'Albert Bierstadt',
+  'George Seurat'
+];
+
+// IDs from CSV
+const ids = [
+  'P001',
+  'P002',
+  'P003',
+  'P004',
+  'P005',
+  'P006'
+];
+
+// Years from CSV
+const years = [
+  '1787',
+  '1889',
+  '1831',
+  '1890',
+  '1876',
+  '1886'
+];
+
+// Descriptions from CSV
+const descriptions = [
+  'Completed in 1787, this painting depicts the moment when the Athenian philosopher Socrates, sentenced to death, prepares to drink hemlock.',
+  'Painted in 1889, this iconic work depicts a night scene with a swirling sky and bright crescent moon.',
+  'Created around 1831, this woodblock print depicts a massive wave threatening boats off the coast of Japan with Mount Fuji in the background.',
+  'Painted in 1890, this impressionist work captures the beauty of spring in Giverny, France.',
+  'Completed in the 1870s, this landscape painting captures the grandeur of the Sierra Nevada mountains.',
+  'Finished in 1886, this pointillist masterpiece depicts people relaxing in a park on the banks of the Seine River.'
+];
+
+// Prices from CSV
+const prices = [
+  4500000,
+  12000000,
+  8750000,
+  7200000,
+  5800000,
+  10500000
+];
+
+// To Sell status from CSV
+const toSellStatus = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+];
+
+// Auction status from CSV
+const auctionStatus = [
+  false,
+  true,
+  false,
+  true,
+  false,
+  true
+];
+
+// Auction end dates from CSV
+const auctionEndDates = [
+  '',
+  '2023-12-31',
+  '',
+  '2023-11-15',
+  '',
+  '2023-10-30'
+];
+
+// Availability status from CSV
+const availabilityStatus = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  false
+];
+
+// Current owners from CSV
+const currentOwners = [
+  'Private Collection',
+  'Anonymous Collector',
+  'Japanese Art Foundation',
+  'European Art Trust',
+  'Western American Art Collection',
+  'Private European Estate'
+];
+
+// Authentication bodies from CSV
+const authenticationBodies = [
+  ['Louvre Museum', 'Metropolitan Museum'],
+  ['Museum of Modern Art', 'Van Gogh Museum'],
+  ['Tokyo National Museum', 'British Museum'],
+  ['Musée d\'Orsay', 'Giverny Foundation'],
+  ['National Gallery of Art', 'Smithsonian American Art Museum'],
+  ['Art Institute of Chicago', 'Musée d\'Orsay']
+];
+
+// Seller comments from CSV
+const sellerComments = [
+  'Acquired from a prestigious European collection in 2005.',
+  'One of Van Gogh\'s most recognized masterpieces with exceptional provenance.',
+  'Excellent condition for its age with vibrant original colors.',
+  'Features Monet\'s garden which inspired many of his most famous works.',
+  'Stunning example of American landscape painting with perfect light quality.',
+  'Remarkable pointillist technique with millions of tiny colored dots forming the image.'
+];
+
+// Combine all the data into the paintingDetails array
+export let paintingDetails = images.map((img, index) => ({
+  id: ids[index],
+  price: prices[index],
+  description: descriptions[index],
+  year: parseInt(years[index]),
+  toSell: toSellStatus[index],
+  auction: auctionStatus[index],
+  dateEndingAuction: auctionEndDates[index],
+  available: availabilityStatus[index],
+  currentOwner: currentOwners[index],
+  authenticatedBy: authenticationBodies[index],
+  commentsOfSeller: sellerComments[index]
+}));
 
 // Gallery contact information
 export const galleryEmail = "art@redeslabs.com";
 
 // Total number of paintings
-export let paintingCount = 0;
+export let paintingCount = images.length;
 
-// Function to parse CSV data and handle quoted fields with commas
-function parseCSVLine(line) {
-  const values = [];
-  let inQuotes = false;
-  let currentValue = '';
-  
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    
-    if (char === '"') {
-      inQuotes = !inQuotes;
-    } else if (char === ',' && !inQuotes) {
-      values.push(currentValue);
-      currentValue = '';
-    } else {
-      currentValue += char;
-    }
-  }
-  
-  // Add the last value
-  values.push(currentValue);
-  
-  return values;
-}
-
-// Load data from CSV file
+// Since we're using hardcoded data, this function just returns the existing data
 export async function loadPaintingData() {
-  try {
-    const response = await fetch('/paintings.csv');
-    const csvText = await response.text();
-    
-    // Parse CSV (skip header row)
-    const rows = csvText.split('\n').slice(1).filter(row => row.trim() !== '');
-    
-    // Process each row
-    paintings = rows.map(row => {
-      // Parse the CSV line properly handling quoted fields
-      const values = parseCSVLine(row);
-      
-      // Map values to object properties
-      const [
-        id, 
-        image_url, 
-        title, 
-        artist, 
-        year, 
-        description, 
-        to_sell, 
-        price, 
-        auction, 
-        date_ending_auction, 
-        available, 
-        current_owner, 
-        authenticated_by, 
-        comments_of_seller
-      ] = values;
-      
-      return {
-        id,
-        image_url,
-        title,
-        artist,
-        year,
-        description,
-        to_sell: to_sell === 'true',
-        price: parseInt(price),
-        auction: auction === 'true',
-        dateEndingAuction: date_ending_auction,
-        available: available === 'true',
-        currentOwner: current_owner,
-        authenticatedBy: authenticated_by.split(',').map(a => a.trim()),
-        commentsOfSeller: comments_of_seller
-      };
-    });
-    
-    // Update the exported arrays
-    images = paintings.map(p => p.image_url);
-    titles = paintings.map(p => p.title);
-    artists = paintings.map(p => p.artist);
-    paintingDetails = paintings.map(p => ({
-      id: p.id,
-      price: p.price,
-      description: p.description,
-      year: parseInt(p.year),
-      toSell: p.to_sell,
-      auction: p.auction,
-      dateEndingAuction: p.dateEndingAuction,
-      available: p.available,
-      currentOwner: p.currentOwner,
-      authenticatedBy: p.authenticatedBy,
-      commentsOfSeller: p.commentsOfSeller
-    }));
-    
-    // Update painting count
-    paintingCount = images.length;
-    
-    console.log(`Loaded ${paintingCount} paintings from CSV`);
-    
-    return paintings;
-  } catch (error) {
-    console.error('Error loading painting data:', error);
-    
-    // Fallback to default data if CSV loading fails
-    setupDefaultData();
-    return paintings;
-  }
+  console.log(`Using ${paintingCount} hardcoded paintings from CSV data`);
+  return paintingDetails.map((details, index) => ({
+    id: details.id,
+    image_url: images[index],
+    title: titles[index],
+    artist: artists[index],
+    year: years[index],
+    description: details.description,
+    to_sell: details.toSell,
+    price: details.price,
+    auction: details.auction,
+    dateEndingAuction: details.dateEndingAuction,
+    available: details.available,
+    currentOwner: details.currentOwner,
+    authenticatedBy: details.authenticatedBy,
+    commentsOfSeller: details.commentsOfSeller
+  }));
 }
