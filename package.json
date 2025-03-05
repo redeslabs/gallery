@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp *.js dist/"
+    "build": "vite build && cp *.js dist/ && node fix-imports.js"
   },
   "author": "",
   "license": "ISC",
