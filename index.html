@@ -356,14 +356,9 @@
 </head>
 
 <body>
-  <!-- Load main.js only if not on mobile -->
+  <!-- Only show mobile overlay if on mobile, otherwise load the script directly -->
   <script>
-    if (!window.isMobile) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = './main.js';
-      document.body.appendChild(script);
-    } else {
+    if (window.isMobile) {
       // For mobile: immediately show the overlay when body loads
       window.addEventListener('DOMContentLoaded', function() {
         document.getElementById('mobileOverlay').style.display = 'flex';
@@ -376,6 +371,10 @@
       });
     }
   </script>
+  
+  <!-- Add the script directly in the HTML - Vite will process it during build -->
+  <script type="module" src="./main.js"></script>
+  
   <h1 id="title"></h1>
   <h2 id="artist"></h2>
   <div id="instructions">Press <span class="key">Enter</span> to view details</div>
