@@ -31,29 +31,50 @@ function getImagePath(imageName) {
     return cleanImageName;
   }
   
-  // Get the current location and handle GitHub Pages deployment
-  const isGitHubPages = window.location.hostname.includes('github.io');
-  const repoName = isGitHubPages ? '/gallery' : '';
-  
-  // For GitHub Pages, we need to consider if we're in a subfolder of the repo
-  // This is a more direct approach than using BASE_URL
-  let fullPath;
-  
-  // Remove any leading slash from the image name
+  // Remove any leading slash
   const normalizedImageName = cleanImageName.startsWith('/') 
     ? cleanImageName.substring(1) 
     : cleanImageName;
   
-  // Construct the full path
-  fullPath = `${repoName}/${normalizedImageName}`;
+  // On GitHub Pages, we need to find the correct path to the images
+  // This attempts to derive the path based on the current script location
+  try {
+    // Get the base path by examining where the current script is running from
+    const scriptElements = document.getElementsByTagName('script');
+    let scriptSrc = '';
+    
+    // Find a script element with a src attribute (preferably our app script)
+    for (let i = 0; i < scriptElements.length; i++) {
+      if (scriptElements[i].src && 
+          (scriptElements[i].src.includes('hall.js') || 
+           scriptElements[i].src.includes('main.js') ||
+           scriptElements[i].src.includes('detailView.js'))) {
+        scriptSrc = scriptElements[i].src;
+        break;
+      }
+    }
+    
+    // If we found a script source, use its directory as our base
+    if (scriptSrc) {
+      // Get the directory part of the script URL
+      const basePath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1);
+      const fullPath = basePath + normalizedImageName;
+      
+      console.log(`Dynamic image path resolved: "${cleanImageName}" → "${fullPath}"`);
+      console.log(`Current script location: ${scriptSrc}`);
+      
+      return fullPath;
+    }
+  } catch (error) {
+    console.warn('Error determining dynamic path:', error);
+  }
   
-  // Ensure we don't have double slashes
-  fullPath = fullPath.replace(/\/+/g, '/');
+  // Fallback: Try both relative and with a simple base URL
+  const isGitHubPages = window.location.hostname.includes('github.io');
+  const repoPath = isGitHubPages ? '/gallery/' : '/';
+  const fullPath = repoPath + normalizedImageName;
   
-  // Log the resolved path for debugging
-  console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
-  console.log(`Current location: ${window.location.href}`);
-  
+  console.log(`Fallback image path: "${cleanImageName}" → "${fullPath}"`);
   return fullPath;
 }
 
