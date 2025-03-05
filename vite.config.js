@@ -10,7 +10,15 @@ export default {
     rollupOptions: {
       input: {
         main: 'index.html',
-        hallway: 'hallway.html'
+        hallway: 'hallway.html',
+        // Include all JavaScript files as explicit entry points
+        mainJs: 'main.js',
+        hallJs: 'hall.js',
+        detailViewJs: 'detailView.js',
+        backgroundJs: 'background.js',
+        galleryDataJs: 'galleryData.js',
+        loadingJs: 'loading.js',
+        pathFixJs: 'pathFix.js'
       }
     }
   },
