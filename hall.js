@@ -1,10 +1,10 @@
-import * as THREE from './three.module.js';
-import { Reflector } from './three/addons/objects/Reflector.js';
-import * as TWEEN from './tween.js';
+import * as THREE from 'three';
+import { Reflector } from 'three/addons/objects/Reflector.js';
+import * as TWEEN from 'tween';
 import { showDetailView, closeDetailView, getImagePath } from './detailView.js';
 import { createSpaceBackground, animateBackground } from './background.js';
 import { images, titles, artists, paintingDetails, galleryEmail, paintingCount, loadPaintingData } from './galleryData.js';
-import { PointerLockControls } from './three/addons/controls/PointerLockControls.js';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 import { initLoadingManager, loadingManager } from './loading.js';
 
 // Initialize the loading manager
