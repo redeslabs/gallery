@@ -18,7 +18,6 @@ export default {
         backgroundJs: 'background.js',
         galleryDataJs: 'galleryData.js',
         loadingJs: 'loading.js',
-        pathFixJs: 'pathFix.js'
       }
     }
   },
