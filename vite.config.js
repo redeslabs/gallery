@@ -3,5 +3,10 @@
 */
 export default {
   // Set the base directory for GitHub pages
-  base: process.env.NODE_ENV === 'production' ? 'gallery/' : ''
+  base: '',  // Empty base path to use relative paths
+  build: {
+    outDir: './dist',
+    sourcemap: true,
+  },
+  publicDir: './public',
 }
