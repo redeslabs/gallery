@@ -1,10 +1,10 @@
-import * as THREE from 'three';
-import { Reflector } from 'three/addons/objects/Reflector.js';
-import * as TWEEN from 'tween';
+import * as THREE from './three.module.js';
+import { Reflector } from './three/addons/objects/Reflector.js';
+import * as TWEEN from './tween.js';
 import { showDetailView, closeDetailView, getImagePath } from './detailView.js';
 import { createSpaceBackground, animateBackground } from './background.js';
 import { images, titles, artists, paintingDetails, galleryEmail, paintingCount, loadPaintingData } from './galleryData.js';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import { PointerLockControls } from './three/addons/controls/PointerLockControls.js';
 import { initLoadingManager, loadingManager } from './loading.js';
 
 // Initialize the loading manager
@@ -572,7 +572,7 @@ async function initializeGallery() {
     
     const instructionsElement = document.getElementById('instructions');
     if (instructionsElement) {
-      instructionsElement.innerHTML = 'Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or press WASD to re-enter first-person mode.<br>Walk to a painting and press Enter or click on it to view details.<br>Press SPACE to play/pause music.';
+      instructionsElement.innerHTML = 'Demo data and use.<br>Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or press WASD to re-enter first-person mode.<br>Use arrow keys or click arrows to change paintings.<br>Click on a painting or press Enter to view details.<br>Press SPACE to play/pause music.';
       instructionsElement.style.textAlign = 'left';
       instructionsElement.style.left = '20px';
       instructionsElement.style.width = 'auto';
