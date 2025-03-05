@@ -1,8 +1,8 @@
 {
-  "name": "threejs-image-gallery",
+  "name": "gallery",
   "version": "1.0.0",
   "description": "3D image gallery created with Three.js",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
