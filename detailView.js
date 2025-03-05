@@ -25,19 +25,35 @@ function getImagePath(imageName) {
   // Make sure we're working with a clean image name
   const cleanImageName = imageName.trim();
   
-  // Check if the path already includes a protocol or is a complete path
-  if (cleanImageName.includes('://') || cleanImageName.startsWith('/')) {
-    return cleanImageName; // Already has a complete path
+  // Check if the path already includes a protocol
+  if (cleanImageName.includes('://')) {
+    console.log(`Using absolute URL: ${cleanImageName}`);
+    return cleanImageName;
   }
   
-  // For GitHub Pages deployment, we need to consider the base URL
-  // In production on GitHub Pages, this will be '/gallery/'
-  const baseUrl = import.meta.env.BASE_URL || '';
+  // Get the current location and handle GitHub Pages deployment
+  const isGitHubPages = window.location.hostname.includes('github.io');
+  const repoName = isGitHubPages ? '/gallery' : '';
   
-  // Since images are at the same level as JS files in the dist folder,
-  // we don't need to add any additional path segments
-  const fullPath = `${baseUrl}${cleanImageName}`;
+  // For GitHub Pages, we need to consider if we're in a subfolder of the repo
+  // This is a more direct approach than using BASE_URL
+  let fullPath;
+  
+  // Remove any leading slash from the image name
+  const normalizedImageName = cleanImageName.startsWith('/') 
+    ? cleanImageName.substring(1) 
+    : cleanImageName;
+  
+  // Construct the full path
+  fullPath = `${repoName}/${normalizedImageName}`;
+  
+  // Ensure we don't have double slashes
+  fullPath = fullPath.replace(/\/+/g, '/');
+  
+  // Log the resolved path for debugging
   console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
+  console.log(`Current location: ${window.location.href}`);
+  
   return fullPath;
 }
 
