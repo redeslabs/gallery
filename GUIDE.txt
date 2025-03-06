@@ -1,0 +1,143 @@
+=====================================================================
+STEP-BY-STEP SETUP GUIDE
+=====================================================================
+
+1. PREPARE YOUR PAINTINGS
+========================
+
+DECIDE WHICH PAINTINGS TO INCLUDE:
+- Determine which paintings you want to sell vs. display as exhibition only
+- For each painting, collect the following information:
+  * Title
+  * Artist name
+  * Year created
+  * Detailed description
+  * Price (if for sale)
+  * Current owner information
+  * Authentication details
+  * Additional comments/history
+
+PREPARE YOUR IMAGES:
+- Each painting needs a high-quality digital image
+- Options for image preparation:
+  a) Use existing digital images of your paintings
+  b) Capture new HDR images with a camera or smartphone
+     - Use good lighting
+     - Avoid glare and reflections
+     - Capture the entire painting with frame if applicable
+- Image requirements:
+  * File size: Maximum 25MB per image
+  * Recommended formats: JPG or PNG
+  * Name files with lowercase letters and no spaces (example: starry_night.jpg)
+
+2. ADD IMAGES TO THE APPLICATION
+===============================
+
+- Open your application folder
+- Navigate to the "public" folder
+- Add images by either:
+  a) Drag and drop your prepared images directly into the public folder
+  b) Copy and paste the files into the public folder
+- Verify all images are properly copied to the public folder
+
+3. UPDATE THE GALLERY DATA FILE
+=============================
+
+- Open the file "galleryData.js" in a text editor
+- Find each array in the file (images, titles, artists, etc.)
+- For each painting you're adding, add corresponding information to EACH array:
+  * images: Add the exact filename (e.g., 'mona_lisa.jpg')
+  * titles: Add the painting title (e.g., 'Mona Lisa')
+  * artists: Add the artist's name (e.g., 'Leonardo da Vinci')
+  * ids: Create a unique ID (following the pattern 'P007', 'P008', etc.)
+  * years: Add the year created (e.g., '1503')
+  * descriptions: Add a detailed description
+  * prices: Add the price in numbers without commas (e.g., 7500000)
+  * toSellStatus: Set to true if for sale, false if exhibition only
+  * auctionStatus: Set to true if available for auction, false if not
+  * auctionEndDates: If in auction, add end date as 'YYYY-MM-DD', otherwise leave as ''
+  * availabilityStatus: Set to true if available for viewing
+  * currentOwners: Add current owner information
+  * authenticationBodies: Add authentication organizations as an array (e.g., ['Louvre Museum', 'Italian Ministry of Culture'])
+  * sellerComments: Add any additional information about the piece
+
+EXAMPLE ENTRY:
+```
+// Add to images array
+images.push('mona_lisa.jpg');
+
+// Add to titles array
+titles.push('Mona Lisa');
+
+// Add to artists array
+artists.push('Leonardo da Vinci');
+
+// Continue for all other arrays...
+```
+
+NOTE: Make sure to maintain the same index position across all arrays!
+
+4. UPDATE APPLICATION TEXT
+========================
+
+- Open "main.js" in a text editor
+- Find line 913 which contains: 'Demo data and use.<br>Use WASD to move...'
+- Replace "Demo data and use" with your gallery name or welcome message
+- Example: 'Welcome to [Your Gallery Name].<br>Use WASD to move...'
+
+- Open "hall.js" in a text editor
+- Find around line 574 which contains instructions text
+- Update as needed with your gallery's specific instructions
+
+5. SAVE YOUR CHANGES
+==================
+
+Using GitHub:
+- Open a terminal or command prompt
+- Navigate to your project folder
+- Run the following commands to save your changes:
+
+```
+git add .
+git commit -m "Updated gallery with new paintings and customized text"
+git push
+```
+
+You will be asked for your GitHub username and password
+
+Alternative (if not using GitHub):
+- Simply save all edited files in your text editor
+
+6. TEST YOUR CHANGES
+==================
+
+- Launch your application
+- Verify that:
+  * All new paintings appear correctly
+  * Images load properly
+  * All painting information is displayed correctly
+  * Your customized texts appear instead of "Demo data"
+
+=====================================================================
+TROUBLESHOOTING
+=====================================================================
+
+IMAGES NOT APPEARING:
+- Ensure image filenames in galleryData.js match exactly with files in the public folder
+- Check that image files are not corrupted
+- Verify image sizes are under 25MB
+
+DATA ISSUES:
+- Confirm all arrays in galleryData.js have the same length
+- Check for missing commas or syntax errors
+- Verify you've added information to ALL arrays
+
+GITHUB ISSUES:
+- If you get "Permission denied" errors, check your GitHub credentials
+- If commit fails, try again after checking your internet connection
+- After successfully pushing changes to GitHub, please note that GitHub Actions take approximately 30 seconds (half a minute) for your changes to appear on the live site
+- Be patient after committing changes, as the deployment process needs time to complete
+
+For further assistance, contact technical support at support@example.com
+
+===================================================================== 
