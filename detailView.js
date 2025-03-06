@@ -15,7 +15,7 @@ export function setLoadingManager(manager) {
 function formatPrice(price) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'EUR',
     maximumFractionDigits: 0
   }).format(price);
 }
@@ -26,12 +26,12 @@ function getImagePath(imageName) {
   const cleanImageName = imageName.trim();
   
   // Check if the path already starts with a slash
-  if (cleanImageName.startsWith('/gallery/')) {
+  if (cleanImageName.startsWith('/')) {
     return cleanImageName; // Already has a leading slash
   }
   
   // Create the proper path
-  const fullPath = '/gallery/' + cleanImageName;
+  const fullPath = '/' + cleanImageName;
   console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
   return fullPath;
 }
@@ -807,6 +807,39 @@ function create3DPainting(index, images, titles) {
         e.preventDefault(); // Prevent default browser behavior
         e.stopPropagation(); // Prevent event from reaching background
       } 
+      // Handle arrow up/down for zoom in/out
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        // Calculate zoom factor based on key (up = zoom in, down = zoom out)
+        const zoomFactor = 0.1;
+        const zoomAmount = e.key === 'ArrowDown' ? zoomFactor : -zoomFactor;
+        
+        // Apply zoom by moving camera - using same logic as wheel zoom
+        camera.position.z = Math.max(0.2, Math.min(8, camera.position.z + zoomAmount));
+        
+        // When very close, show tooltip with zoom level
+        const zoomPercentage = Math.round((1 - ((camera.position.z - 0.2) / 7.8)) * 100);
+        
+        // Only show tooltip when zoomed in significantly
+        if (zoomPercentage > 70) {
+          showZoomTooltip(zoomPercentage);
+        } else {
+          hideZoomTooltip();
+        }
+        
+        // Update field of view for more natural zoom feeling when very close
+        if (camera.position.z < 1.0) {
+          // Gradually decrease FOV when very close for more detail
+          camera.fov = 45 - (1.0 - camera.position.z) * 10;
+          camera.updateProjectionMatrix();
+        } else if (camera.fov !== 45) {
+          // Reset to default FOV
+          camera.fov = 45;
+          camera.updateProjectionMatrix();
+        }
+        
+        e.preventDefault();
+        e.stopPropagation();
+      }
       // Handle R key for resetting position
       else if (key === 'r') {
         // Reset position and rotation
@@ -897,16 +930,16 @@ function create3DPainting(index, images, titles) {
       
       // Apply WASD movement
       if (movementDirection.w) {
-        paintingGroup.position.y += movementSpeed;
+        paintingGroup.position.y += movementSpeed;  // Up
       }
       if (movementDirection.s) {
-        paintingGroup.position.y -= movementSpeed;
+        paintingGroup.position.y -= movementSpeed;  // Down
       }
       if (movementDirection.a) {
-        paintingGroup.position.x -= movementSpeed;
+        paintingGroup.position.x -= movementSpeed;  // Left
       }
       if (movementDirection.d) {
-        paintingGroup.position.x += movementSpeed;
+        paintingGroup.position.x += movementSpeed;  // Right
       }
       
       // Set limits to prevent moving too far off-screen
@@ -916,7 +949,7 @@ function create3DPainting(index, images, titles) {
       
       // Add subtle floating motion (only if not being moved by WASD)
       if (!movementDirection.w && !movementDirection.s) {
-        paintingGroup.position.y += Math.sin(Date.now() * 0.001) * 0.005;
+        paintingGroup.position.y += Math.sin(Date.now() * 0.001) * 0.0015;
       }
       
       // Render scene
@@ -1209,7 +1242,7 @@ function showZoomInstructions() {
   instructionsDiv.innerHTML = `
     <div class="instruction-content">
       <div class="instruction-icon">🔍</div>
-      <div class="instruction-text">Use the mouse wheel to zoom in for extremely detailed view</div>
+      <div class="instruction-text">Use the mouse wheel or ↑/↓ arrow keys to zoom in for extremely detailed view</div>
     </div>
   `;
   
