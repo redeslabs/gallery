@@ -25,56 +25,14 @@ function getImagePath(imageName) {
   // Make sure we're working with a clean image name
   const cleanImageName = imageName.trim();
   
-  // Check if the path already includes a protocol
-  if (cleanImageName.includes('://')) {
-    console.log(`Using absolute URL: ${cleanImageName}`);
-    return cleanImageName;
+  // Check if the path already starts with a slash
+  if (cleanImageName.startsWith('/gallery/')) {
+    return cleanImageName; // Already has a leading slash
   }
   
-  // Remove any leading slash
-  const normalizedImageName = cleanImageName.startsWith('/') 
-    ? cleanImageName.substring(1) 
-    : cleanImageName;
-  
-  // On GitHub Pages, we need to find the correct path to the images
-  // This attempts to derive the path based on the current script location
-  try {
-    // Get the base path by examining where the current script is running from
-    const scriptElements = document.getElementsByTagName('script');
-    let scriptSrc = '';
-    
-    // Find a script element with a src attribute (preferably our app script)
-    for (let i = 0; i < scriptElements.length; i++) {
-      if (scriptElements[i].src && 
-          (scriptElements[i].src.includes('hall.js') || 
-           scriptElements[i].src.includes('main.js') ||
-           scriptElements[i].src.includes('detailView.js'))) {
-        scriptSrc = scriptElements[i].src;
-        break;
-      }
-    }
-    
-    // If we found a script source, use its directory as our base
-    if (scriptSrc) {
-      // Get the directory part of the script URL
-      const basePath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1);
-      const fullPath = basePath + normalizedImageName;
-      
-      console.log(`Dynamic image path resolved: "${cleanImageName}" → "${fullPath}"`);
-      console.log(`Current script location: ${scriptSrc}`);
-      
-      return fullPath;
-    }
-  } catch (error) {
-    console.warn('Error determining dynamic path:', error);
-  }
-  
-  // Fallback: Try both relative and with a simple base URL
-  const isGitHubPages = window.location.hostname.includes('github.io');
-  const repoPath = isGitHubPages ? '/gallery/' : '/';
-  const fullPath = repoPath + normalizedImageName;
-  
-  console.log(`Fallback image path: "${cleanImageName}" → "${fullPath}"`);
+  // Create the proper path
+  const fullPath = '/gallery/' + cleanImageName;
+  console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
   return fullPath;
 }
 
