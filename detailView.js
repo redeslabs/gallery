@@ -26,7 +26,7 @@ function getImagePath(imageName) {
   const cleanImageName = imageName.trim();
   
   // Check if the path already starts with a slash
-  if (cleanImageName.startsWith('/')) {
+  if (cleanImageName.startsWith('/gallery/')) {
     return cleanImageName; // Already has a leading slash
   }
   
