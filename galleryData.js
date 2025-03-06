@@ -1,5 +1,52 @@
 // Gallery Data File - Contains all painting information and gallery details
 
+/*
+ * ====================================================================
+ * TUTORIAL: HOW TO ADD NEW PAINTINGS TO THE GALLERY APP
+ * ====================================================================
+ * 
+ * Follow these steps to add a new painting to the gallery:
+ * 
+ * 1. PREPARE YOUR IMAGE:
+ *    - Save your painting image in the public folder
+ *    - Use a descriptive name with lowercase letters and no spaces (e.g., 'mona_lisa.jpg')
+ * 
+ * 2. ADD YOUR PAINTING DATA:
+ *    - Find each array below (images, titles, artists, etc.)
+ *    - Add your painting's information to EACH array
+ *    - Make sure to maintain the same index position across all arrays
+ * 
+ * COMPLETE EXAMPLE:
+ * To add "Mona Lisa" by Leonardo da Vinci, you would add an entry to each array:
+ * 
+ *    images:              'mona_lisa.jpg'
+ *    titles:              'Mona Lisa'
+ *    artists:             'Leonardo da Vinci'
+ *    ids:                 'P007'  (incrementing from the last ID)
+ *    years:               '1503'
+ *    descriptions:        'Painted between 1503 and 1519, the Mona Lisa is famous for her enigmatic smile.'
+ *    prices:              7500000
+ *    toSellStatus:        true  (if available for sale, false if not)
+ *    auctionStatus:       false (if not in auction, true if in auction)
+ *    auctionEndDates:     ''    (empty string if not in auction, or date format 'YYYY-MM-DD')
+ *    availabilityStatus:  true  (if available for viewing)
+ *    currentOwners:       'Private Collection'
+ *    authenticationBodies: ['Louvre Museum', 'Italian Ministry of Culture']
+ *    sellerComments:      'Exceptional provenance with documentation dating back to the 16th century.'
+ * 
+ * IMPORTANT NOTES:
+ *    - The image filename in the 'images' array MUST match your actual file in the public folder
+ *    - Create a unique ID for each new painting (e.g., 'P007', 'P008', etc.)
+ *    - All arrays must have the same length
+ *    - Required fields for each painting: image, title, artist, id, year, description, price
+ *    - Maintain the proper data type for each field (strings, numbers, booleans, arrays)
+ *    - No code changes are needed in the functions at the bottom of this file
+ * 
+ * After adding your data, the application will automatically display your new painting
+ * in the gallery when it loads!
+ * ====================================================================
+ */
+
 // Hardcoded painting data from CSV
 // Exported arrays with painting data from CSV
 export let images = [
