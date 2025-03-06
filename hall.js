@@ -572,7 +572,7 @@ async function initializeGallery() {
     
     const instructionsElement = document.getElementById('instructions');
     if (instructionsElement) {
-      instructionsElement.innerHTML = 'Demo data and use.<br>Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or press WASD to re-enter first-person mode.<br>Use arrow keys or click arrows to change paintings.<br>Click on a painting or press Enter to view details.<br>Press SPACE to play/pause music.';
+      instructionsElement.innerHTML = 'Demo data.<br>Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or press WASD to re-enter first-person mode.<br>Use arrow keys or click arrows to change paintings.<br>Click on a painting or press Enter to view details.<br>Press SPACE to play/pause music.';
       instructionsElement.style.textAlign = 'left';
       instructionsElement.style.left = '20px';
       instructionsElement.style.width = 'auto';
