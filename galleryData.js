@@ -202,7 +202,8 @@ export let paintingDetails = images.map((img, index) => ({
 }));
 
 // Gallery contact information
-export const galleryEmail = "art@redeslabs.com";
+// Change also in detail view js file
+export const galleryEmail = "hello@redeslabs.com";
 
 // Total number of paintings
 export let paintingCount = images.length;
