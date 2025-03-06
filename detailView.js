@@ -31,7 +31,7 @@ function getImagePath(imageName) {
   }
   
   // Create the proper path
-  const fullPath = '/' + cleanImageName;
+  const fullPath = '/gallery/' + cleanImageName;
   console.log(`Image path resolved: "${cleanImageName}" → "${fullPath}"`);
   return fullPath;
 }
