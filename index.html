@@ -369,14 +369,11 @@
         document.getElementById('instructions').style.display = 'none';
         document.getElementById('switchViewBtn').style.display = 'none';
       });
-    } else {
-      // Only load the main script if not on mobile
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = '/gallery/main.js';
-      document.head.appendChild(script);
     }
   </script>
+  
+  <!-- Add the script directly in the HTML - Vite will process it during build -->
+  <script type="module" src="./main.js"></script>
   
   <h1 id="title"></h1>
   <h2 id="artist"></h2>
