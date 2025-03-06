@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Art Gallery</title>
+  <title>REDES Gallery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100&display=swap" rel="stylesheet">
@@ -353,6 +353,8 @@
     // Set a flag for use throughout the page
     window.isMobile = isMobileDevice();
   </script>
+  <!-- Direct script inclusion instead of dynamic creation -->
+  <script type="module" src="./hall.js"></script>
 </head>
 
 <body>
@@ -369,12 +371,6 @@
         document.getElementById('instructions').style.display = 'none';
         document.getElementById('switchViewBtn').style.display = 'none';
       });
-    } else {
-      // Only load the main script if not on mobile
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = './hall.js';
-      document.head.appendChild(script);
     }
   </script>
   <h1 id="title"></h1>
