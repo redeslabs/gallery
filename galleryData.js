@@ -47,7 +47,8 @@
  * ====================================================================
  */
 // For new line in 'bla bla' text use <br>. For example 'this is a new<br>line'. br is for break
-
+// ----------------------------------------------------------------------------------------
+// Ensure all of the below have been filled for all the number of paintings and don't forget , or a '
 // Hardcoded painting data from CSV
 // Exported arrays with painting data from CSV
 export let images = [
@@ -200,7 +201,8 @@ const sellerComments = [
   'DEMO DATA! NOT REAL! Remarkable pointillist technique with millions of tiny colored dots forming the image.',
   ''
 ];
-
+// ----------------------------------------------------------------------------------------
+// Do not edit below from here
 // Combine all the data into the paintingDetails array
 export let paintingDetails = images.map((img, index) => ({
   id: ids[index],
