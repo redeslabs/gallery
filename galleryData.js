@@ -46,9 +46,7 @@
  * in the gallery when it loads!
  * ====================================================================
  */
-
-// Gallery contact information
-export const galleryEmail = "hello@redeslabs.com";
+// For new line in 'bla bla' text use <br>. For example 'this is a new<br>line'. br is for break
 
 // Hardcoded painting data from CSV
 // Exported arrays with painting data from CSV
@@ -123,7 +121,7 @@ const prices = [
   7200000,
   5800000,
   10500000,
-  9000000
+  0
 ];
 
 // To Sell status from CSV
@@ -167,7 +165,7 @@ const availabilityStatus = [
   true,
   true,
   false,
-  true
+  false
 ];
 
 // Current owners from CSV
@@ -178,7 +176,7 @@ const currentOwners = [
   'European Art Trust',
   'Western American Art Collection',
   'Private European Estate',
-  'Louvre Museum'
+  ''
 ];
 
 // Authentication bodies from CSV
@@ -189,7 +187,7 @@ const authenticationBodies = [
   ['Musée d\'Orsay', 'Giverny Foundation'],
   ['National Gallery of Art', 'Smithsonian American Art Museum'],
   ['Art Institute of Chicago', 'Musée d\'Orsay'],
-  ['Louvre Museum', 'Italian Ministry of Culture']
+  []
 ];
 
 // Seller comments from CSV
@@ -200,7 +198,7 @@ const sellerComments = [
   'DEMO DATA! NOT REAL! Features Monet\'s garden which inspired many of his most famous works.',
   'DEMO DATA! NOT REAL! Stunning example of American landscape painting with perfect light quality.',
   'DEMO DATA! NOT REAL! Remarkable pointillist technique with millions of tiny colored dots forming the image.',
-  'DEMO DATA! NOT REAL! The world\'s most famous portrait painting, housed at the Louvre Museum in Paris.'
+  ''
 ];
 
 // Combine all the data into the paintingDetails array
