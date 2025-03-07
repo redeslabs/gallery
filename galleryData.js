@@ -47,6 +47,9 @@
  * ====================================================================
  */
 
+// Gallery contact information
+export const galleryEmail = "hello@redeslabs.com";
+
 // Hardcoded painting data from CSV
 // Exported arrays with painting data from CSV
 export let images = [
@@ -55,7 +58,8 @@ export let images = [
   'wave.jpg',
   'spring.jpg',
   'mountain.jpg',
-  'sunday.jpg'
+  'sunday.jpg',
+  'monalisa.jpg'
 ];
 
 export let titles = [
@@ -64,7 +68,8 @@ export let titles = [
   'The Great Wave off Kanagawa',
   'Effect of Spring Giverny',
   'Mount Corcoran',
-  'A Sunday on La Grande Jatte'
+  'A Sunday on La Grande Jatte',
+  'Mona Lisa'
 ];
 
 export let artists = [
@@ -73,7 +78,8 @@ export let artists = [
   'Katsushika Hokusai',
   'Claude Monet',
   'Albert Bierstadt',
-  'George Seurat'
+  'George Seurat',
+  'Leonardo da Vinci'
 ];
 
 // IDs from CSV
@@ -83,7 +89,8 @@ const ids = [
   'P003',
   'P004',
   'P005',
-  'P006'
+  'P006',
+  'P007'
 ];
 
 // Years from CSV
@@ -93,7 +100,8 @@ const years = [
   '1831',
   '1890',
   '1876',
-  '1886'
+  '1886',
+  '1503'
 ];
 
 // Descriptions from CSV
@@ -103,7 +111,8 @@ const descriptions = [
   'Created around 1831, this woodblock print depicts a massive wave threatening boats off the coast of Japan with Mount Fuji in the background.',
   'Painted in 1890, this impressionist work captures the beauty of spring in Giverny, France.',
   'Completed in the 1870s, this landscape painting captures the grandeur of the Sierra Nevada mountains.',
-  'Finished in 1886, this pointillist masterpiece depicts people relaxing in a park on the banks of the Seine River.'
+  'Finished in 1886, this pointillist masterpiece depicts people relaxing in a park on the banks of the Seine River.',
+  'Painted between 1503 and 1519, the Mona Lisa is famous for her enigmatic smile and is one of the most recognized paintings in the world.'
 ];
 
 // Prices from CSV
@@ -113,7 +122,8 @@ const prices = [
   8750000,
   7200000,
   5800000,
-  10500000
+  10500000,
+  9000000
 ];
 
 // To Sell status from CSV
@@ -123,7 +133,8 @@ const toSellStatus = [
   true,
   true,
   true,
-  true
+  true,
+  false
 ];
 
 // Auction status from CSV
@@ -133,7 +144,8 @@ const auctionStatus = [
   false,
   true,
   false,
-  true
+  true,
+  false
 ];
 
 // Auction end dates from CSV
@@ -143,7 +155,8 @@ const auctionEndDates = [
   '',
   '2023-11-15',
   '',
-  '2023-10-30'
+  '2023-10-30',
+  ''
 ];
 
 // Availability status from CSV
@@ -153,7 +166,8 @@ const availabilityStatus = [
   true,
   true,
   true,
-  false
+  false,
+  true
 ];
 
 // Current owners from CSV
@@ -163,7 +177,8 @@ const currentOwners = [
   'Japanese Art Foundation',
   'European Art Trust',
   'Western American Art Collection',
-  'Private European Estate'
+  'Private European Estate',
+  'Louvre Museum'
 ];
 
 // Authentication bodies from CSV
@@ -173,7 +188,8 @@ const authenticationBodies = [
   ['Tokyo National Museum', 'British Museum'],
   ['Musée d\'Orsay', 'Giverny Foundation'],
   ['National Gallery of Art', 'Smithsonian American Art Museum'],
-  ['Art Institute of Chicago', 'Musée d\'Orsay']
+  ['Art Institute of Chicago', 'Musée d\'Orsay'],
+  ['Louvre Museum', 'Italian Ministry of Culture']
 ];
 
 // Seller comments from CSV
@@ -183,7 +199,8 @@ const sellerComments = [
   'Excellent condition for its age with vibrant original colors.',
   'Features Monet\'s garden which inspired many of his most famous works.',
   'Stunning example of American landscape painting with perfect light quality.',
-  'Remarkable pointillist technique with millions of tiny colored dots forming the image.'
+  'Remarkable pointillist technique with millions of tiny colored dots forming the image.',
+  'The world\'s most famous portrait painting, housed at the Louvre Museum in Paris.'
 ];
 
 // Combine all the data into the paintingDetails array
@@ -200,10 +217,6 @@ export let paintingDetails = images.map((img, index) => ({
   authenticatedBy: authenticationBodies[index],
   commentsOfSeller: sellerComments[index]
 }));
-
-// Gallery contact information
-// Change also in detail view js file
-export const galleryEmail = "hello@redeslabs.com";
 
 // Total number of paintings
 export let paintingCount = images.length;
