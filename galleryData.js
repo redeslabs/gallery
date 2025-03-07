@@ -194,13 +194,13 @@ const authenticationBodies = [
 
 // Seller comments from CSV
 const sellerComments = [
-  'Acquired from a prestigious European collection in 2005.',
-  'One of Van Gogh\'s most recognized masterpieces with exceptional provenance.',
-  'Excellent condition for its age with vibrant original colors.',
-  'Features Monet\'s garden which inspired many of his most famous works.',
-  'Stunning example of American landscape painting with perfect light quality.',
-  'Remarkable pointillist technique with millions of tiny colored dots forming the image.',
-  'The world\'s most famous portrait painting, housed at the Louvre Museum in Paris.'
+  'DEMO DATA! NOT REAL! Acquired from a prestigious European collection in 2005.',
+  'DEMO DATA! NOT REAL! One of Van Gogh\'s most recognized masterpieces with exceptional provenance.',
+  'DEMO DATA! NOT REAL! Excellent condition for its age with vibrant original colors.',
+  'DEMO DATA! NOT REAL! Features Monet\'s garden which inspired many of his most famous works.',
+  'DEMO DATA! NOT REAL! Stunning example of American landscape painting with perfect light quality.',
+  'DEMO DATA! NOT REAL! Remarkable pointillist technique with millions of tiny colored dots forming the image.',
+  'DEMO DATA! NOT REAL! The world\'s most famous portrait painting, housed at the Louvre Museum in Paris.'
 ];
 
 // Combine all the data into the paintingDetails array
