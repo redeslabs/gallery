@@ -195,7 +195,7 @@ const mirror = new Reflector(
     textureHeight: window.innerHeight * window.devicePixelRatio,
   }
 );
-mirror.position.set(0, -1.1, 100); // Center at z=100
+mirror.position.set(0, -1.1, 90);
 mirror.rotation.x = -Math.PI / 2;
 scene.add(mirror);
 
