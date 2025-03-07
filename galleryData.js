@@ -51,6 +51,8 @@
 // Ensure all of the below have been filled for all the number of paintings and don't forget , or a '
 // Hardcoded painting data from CSV
 // Exported arrays with painting data from CSV
+// email changes from detailView.js file, line 1181
+
 export let images = [
   'socrates.jpg',
   'stars.jpg',
