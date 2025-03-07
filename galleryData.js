@@ -22,16 +22,16 @@
  *    images:              'mona_lisa.jpg'
  *    titles:              'Mona Lisa'
  *    artists:             'Leonardo da Vinci'
- *    ids:                 'P007'  (incrementing from the last ID)
+ *    ids:                 'P042'  (preferably incrementing from the last ID but does not matter)
  *    years:               '1503'
  *    descriptions:        'Painted between 1503 and 1519, the Mona Lisa is famous for her enigmatic smile.'
- *    prices:              7500000
+ *    prices:              75000000
  *    toSellStatus:        true  (if available for sale, false if not)
  *    auctionStatus:       false (if not in auction, true if in auction)
  *    auctionEndDates:     ''    (empty string if not in auction, or date format 'YYYY-MM-DD')
- *    availabilityStatus:  true  (if available for viewing)
+ *    availabilityStatus:  true  (if available, else displays currently not available)
  *    currentOwners:       'Private Collection'
- *    authenticationBodies: ['Louvre Museum', 'Italian Ministry of Culture']
+ *    authenticationBodies: ['Louvre Museum', 'Italian Ministry of Culture'], each new is seperated by a comma, else [] for empty
  *    sellerComments:      'Exceptional provenance with documentation dating back to the 16th century.'
  * 
  * IMPORTANT NOTES:
