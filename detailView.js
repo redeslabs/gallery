@@ -142,7 +142,7 @@ function showDetailView(index, images, titles, artists, paintingDetails, mainRen
             ${painting.available ? '<button id="buyButton">Purchase</button>' : 
               '<button disabled>Currently Unavailable</button>'}
           </div>
-        ` : '<p>This painting is not for sale.</p>'}
+        ` : '<p> </p>'}
       </div>
     </div>
   `;
