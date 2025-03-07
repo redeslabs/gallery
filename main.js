@@ -911,7 +911,7 @@ async function initializeGallery() {
     // Add enhanced instructions for first-person mode
     const instructionsElement = document.getElementById('instructions');
     if (instructionsElement) {
-      instructionsElement.innerHTML = 'Demo data.<br>Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or hold press WASD to re-enter first-person mode.<br>Use arrow keys or click arrows to change paintings.<br>Click on a painting or press Enter to view details.<br>Press SPACE to play/pause music.';
+      instructionsElement.innerHTML = 'Use WASD to move and mouse to look around.<br>Hold SHIFT to run faster.<br>Press ESC to unlock mouse cursor, click or hold press WASD to re-enter first-person mode.<br>Use arrow keys or click arrows to change paintings.<br>Click on a painting or press Enter to view details.<br>Press SPACE to play/pause music.';
       
       // Apply styles to position instructions at bottom left
       instructionsElement.style.textAlign = 'left';
